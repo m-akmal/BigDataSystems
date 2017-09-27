@@ -2,7 +2,7 @@ import org.apache.spark.SparkContext
 import org.apache.spark.SparkContext._
 import org.apache.spark.SparkConf
 
-object PageRankPartC1 {
+object PartCQuestion1 {
   def main(args: Array[String]) {
 
     val file_path: String = {
@@ -21,9 +21,15 @@ object PageRankPartC1 {
     // println(file_path)
     // println(num_of_iterations)
     // println(num_of_partitions)
-    
-    val conf = new SparkConf().setAppName("CS-744-Assignment1-PartC-1")
 
+    val conf = new SparkConf().setAppName("CS-744-Assignment1-PartC-Question1")
+    conf.set("spark.driver.memory", "1g")
+    conf.set("spark.eventLog.enabled","true")
+    conf.set("spark.eventLog.dir", "hdfs://10.254.0.146/spark/history")
+    conf.set("spark.executor.memory", "1g")
+    conf.set("spark.executor.cores", "4")
+    conf.set("spark.task.cpus", "1")
+    
     val sc = new SparkContext(conf)
 
     val datafile = sc.textFile(file_path, num_of_partitions)

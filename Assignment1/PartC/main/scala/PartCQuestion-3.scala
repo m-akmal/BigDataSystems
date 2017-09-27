@@ -3,7 +3,7 @@ import org.apache.spark.SparkContext._
 import org.apache.spark.SparkConf
 import org.apache.spark.RangePartitioner
 
-object PageRankPartC3 {
+object PartCQuestion3 {
   def main(args: Array[String]) {
 
     val file_path: String = {
@@ -24,6 +24,12 @@ object PageRankPartC3 {
     // println(num_of_partitions)
 
     val conf = new SparkConf().setAppName("CS-744-Assignment1-PartC-3")
+    conf.set("spark.driver.memory", "1g")
+    conf.set("spark.eventLog.enabled","true")
+    conf.set("spark.eventLog.dir", "hdfs://10.254.0.146/spark/history")
+    conf.set("spark.executor.memory", "1g")
+    conf.set("spark.executor.cores", "4")
+    conf.set("spark.task.cpus", "1")
 
     val sc = new SparkContext(conf)
 
