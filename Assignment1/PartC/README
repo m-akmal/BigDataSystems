@@ -1,0 +1,19 @@
+Group 23 Part C Readme
+
+The directory contains 3 scripts:
+    1. PartCQuestion1.sh (Runs Page Rank with Default Partitioning)
+    2. PartCQuestion2.sh (Runs Page Rank with Range Partitioning)
+    3. PartCQuestion3.sh (Runs Page Rank with Range Partitioning and Memory Persistence)
+
+The Spark Apps are written in Scala.
+    1. main/scala/PartCQuestion-1.scala (Runs Page Rank with Default Partitioning)
+    2. main/scala/PartCQuestion-2.scala (Runs Page Rank with Range Partitioning)
+    3. main/scala/PartCQuestion-3.scala (Runs Page Rank with Range Partitioning and Memory Persistence)
+
+build.sbt : File used by SBT Tool to create Jar of compiled Scala Apps.
+
+Each of the Spark takes 2 argument - HDFS path to datafile and Number of Iterations of PageRank
+
+Important Note/Assumptions:
+    1. We have used LeftOuterJoin instead of Join. This change doesn't impact the output of the spark app. Leftouterjoin seems to be faster than Join in our case.
+    2. For sink nodes (No referring to any other node), we are keeping the rank as original rank 1. 
