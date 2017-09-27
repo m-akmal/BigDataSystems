@@ -15,7 +15,7 @@ object PartCQuestion2 {
 	else { 10 }
     }
     val num_of_partitions: Int = {
-    	if(args.length > 1) args(2).toInt
+    	if(args.length > 2) args(2).toInt
 	else { 50 }
     }
 
