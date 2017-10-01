@@ -179,7 +179,7 @@ public class AnagramSorter {
               output_val += str_val + "\n";
             }
             outputKey.set("");
-      			outputValue.set(output_val);
+      			outputValue.set(output_val.trim());
       			results.collect(outputKey, outputValue);
         }
     }
