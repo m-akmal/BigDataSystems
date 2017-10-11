@@ -1,37 +1,27 @@
-## Welcome to GitHub Pages
+## CS 744 Big Data Systems Fall 2017
 
-You can use the [editor on GitHub](https://github.com/tarunbansal/BigDataSystems/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+Project and Assignment details page for Big Data Systems course (CS 744) at University of Wisconsin-Madison during Fall 2017 semester.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+### Team members
 
-### Markdown
+Tarun Bansal (tbansal@wisc.edu), Rohit Damkondwar (damkondwar@wisc.edu), and Pavan Kemparaju (kemparaju@wisc.edu).
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+### PROJECT
 
-```markdown
-Syntax highlighted code block
+#### PROBLEM STATEMENT
 
-# Header 1
-## Header 2
-### Header 3
+#### TIMELINE
 
-- Bulleted
-- List
+#### FINAL REPORT
 
-1. Numbered
-2. List
+### Assignment 1
 
-**Bold** and _Italic_ and `Code` text
+#### PART A
 
-[Link](url) and ![Image](src)
-```
+#### PART B
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+#### PART C
 
-### Jekyll Themes
+### Assignment 2
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/tarunbansal/BigDataSystems/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+### Assignment 3
