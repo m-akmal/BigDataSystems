@@ -1,10 +1,10 @@
 #!/bin/sh
 
 start_spark_job() {
-    $SPARK_HOME/bin/spark-submit --class PartCQuestion1 --master spark://10.254.0.146:7077 \
-                                 /home/ubuntu/rohit/PageRankSparkApp/target/scala-2.11/page-rank-group-23_2.11-1.0.jar \
-	                         /spark/deployment/web-BerkStan.txt \
-                                 10
+    $SPARK_HOME/bin/spark-submit --class PartBApplication1Question1 --master spark://10.254.0.146:7077 \
+                                 file:///home/ubuntu/rohit/assignment3/PartB/target/scala-2.11/page-rank-group-23_2.11-1.0.jar \
+	                             /graphx/soc-LiveJournal1.txt
+                                 20
 }
 
 echo "Clearing cache"

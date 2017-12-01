@@ -1,0 +1,10 @@
+Raw Readings:
+
+GraphX:
+IO_read=2216316 IO_write=8081468
+Net_recv=18762803624 Net_send=8083708
+
+PageRank Spark:
+IO_read=2162412 IO_write=12984920
+Net_recv=23872728674 Net_send=12985852
+
