@@ -5,7 +5,7 @@ tf.app.flags.DEFINE_integer("task_index", 0, "Index of the worker task")
 FLAGS = tf.app.flags.FLAGS
 
 num_features = 33762578
-alpha = 0.1
+eta = 0.01
 num_iterations = 1000
 
 g = tf.Graph()
@@ -45,22 +45,15 @@ with g.as_default():
                                             tf.sparse_tensor_to_dense(value))
 	
         dot = tf.reduce_sum(tf.mul(w,tf.transpose(dense_feature)))
-	dot = tf.Print(dot, [dot], "dot on %d"%FLAGS.task_index)
+        dot = tf.Print(dot, [dot], "dot on %d"%FLAGS.task_index)
         local_gradient = tf.mul(tf.mul(label, tf.sigmoid(tf.mul(label,dot)-1)),dense_feature)
         
-        # reader = tf.ones([10, 1], name="operator_%d" % FLAGS.task_index)
-        # not the gradient compuation here is a random operation. You need
-        # to use the right way (as described in assignment 3 desc).
-        # we use this specific example to show that gradient computation
-        # requires use of the model
-        # local_gradient = tf.mul(reader, tf.matmul(tf.transpose(w), reader))
-
     with tf.device("/job:worker/task:0"):
-        assign_op = w.assign_add(tf.mul(local_gradient, alpha))
+        assign_op = w.assign_sub(tf.mul(local_gradient, eta))
 
 
     with tf.Session("grpc://vm-23-%d:2222" % (FLAGS.task_index+1)) as sess:
-	cord = tf.train.Coordinator()
+	    cord = tf.train.Coordinator()
         threads = tf.train.start_queue_runners(sess=sess,  coord=cord)
         # only one client initializes the variable
         if FLAGS.task_index == 0:
@@ -68,7 +61,6 @@ with g.as_default():
         for i in range(0, num_iterations):
             sess.run(assign_op)
             print w.eval()
-	cord.request_stop()
-	cord.join(threads)
+	    cord.request_stop()
+	    cord.join(threads)
         sess.close()
-

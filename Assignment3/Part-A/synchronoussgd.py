@@ -4,6 +4,7 @@ import tensorflow as tf
 
 num_features = 33762578
 num_updates = 15
+eta = 0.01
 
 def local_computation(file_list):
     filename_queue = tf.train.string_input_producer(file_list, num_epochs=None)
@@ -29,27 +30,12 @@ def local_computation(file_list):
                                         [num_features,],
                                         tf.sparse_tensor_to_dense(value))
 
-    # output =  sess.run(local_gradient)
-    print("dense::  ", dense_feature)
-
     # -- SGD error computation
     dot = tf.reduce_sum(tf.mul(w, tf.transpose(dense_feature)))
     local_gradient = label * (tf.sigmoid(label * dot) - 1) * dense_feature
-    # local_gradient = tf.mul(tf.mul(label, tf.sigmoid(tf.mul(label, dot))-1, dense_feature))
     gradients.append(local_gradient)
     # !-- SGD error computation
      
-    # this bit returns a dummy value 
-    # reader = tf.ones([10, 1], name="operator_%d" % i)
-    # not the gradient compuation here is a random operation. You need
-    # to use the right way (as described in assignment 3 desc).
-    # we use this specific example to show that gradient computation
-    # requires use of the model
-    # local_gradient = tf.mul(reader, tf.matmul(tf.transpose(w), reader))
-    # gradients.append(tf.mul(local_gradient, 0.1))
-    # gradients.append(output)
-    # print("Local Gradient :: ", output)
-
 files = {
     0: ['/home/ubuntu/rohit/tf/syncsgd/data/criteo-tfr/tfrecords00', '/home/ubuntu/rohit/tf/syncsgd/data/criteo-tfr/tfrecords01', '/home/ubuntu/rohit/tf/syncsgd/data/criteo-tfr/tfrecords02', '/home/ubuntu/rohit/tf/syncsgd/data/criteo-tfr/tfrecords03', '/home/ubuntu/rohit/tf/syncsgd/data/criteo-tfr/tfrecords04'],
     1: ['/home/ubuntu/rohit/tf/syncsgd/data/criteo-tfr/tfrecords05', '/home/ubuntu/rohit/tf/syncsgd/data/criteo-tfr/tfrecords06', '/home/ubuntu/rohit/tf/syncsgd/data/criteo-tfr/tfrecords07', '/home/ubuntu/rohit/tf/syncsgd/data/criteo-tfr/tfrecords08', '/home/ubuntu/rohit/tf/syncsgd/data/criteo-tfr/tfrecords09'],
@@ -77,15 +63,15 @@ with g.as_default():
     # we create an operator to aggregate the local gradients
     with tf.device("/job:worker/task:0"):
         aggregator = tf.add_n(gradients)
-        #
-        assign_op = w.assign_add(aggregator)
+        w = w.assign_sub(tf.multiply(aggregator, eta))
+        # assign_op = w.assign_add(aggregator)
 
     with tf.Session("grpc://vm-23-1:2222") as sess:
         tf.train.start_queue_runners(sess=sess)
         sess.run(tf.initialize_all_variables())
         for i in range(0, num_updates):
 	    # print("# of gradients", len(gradients))
-            sess.run(assign_op)
+            sess.run(w)
             print w.eval()
         sess.close()
 
