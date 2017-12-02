@@ -19,7 +19,7 @@ g = tf.Graph()
 
 with g.as_default():
 
-    # creating a model variable on task 0. This is a process running on node vm-48-1
+    # creating a model variable on task 0. This is a process running on node vm-23-1
     with tf.device("/job:worker/task:0"):
         w = tf.Variable(tf.ones([num_features,]), name="model")
 
@@ -48,7 +48,6 @@ with g.as_default():
 
         dense_feature = tf.sparse_to_dense(tf.sparse_tensor_to_dense(index),
                                             [num_features,],
-        #                               tf.constant([33762578, 1], dtype=tf.int64),
                                             tf.sparse_tensor_to_dense(value))
 	
         dot = tf.reduce_sum(tf.mul(w,tf.transpose(dense_feature)))
@@ -62,8 +61,6 @@ with g.as_default():
     with tf.Session("grpc://vm-23-%d:2222" % (FLAGS.task_index+1)) as sess:
         cord = tf.train.Coordinator()
         threads = tf.train.start_queue_runners(sess=sess, coord=cord)
-        if FLAGS.task_index == 0:
-            sess.run(tf.initialize_all_variables())
         if FLAGS.task_index == 0:
             sess.run(tf.initialize_all_variables())
         for i in range(0, num_iterations):
