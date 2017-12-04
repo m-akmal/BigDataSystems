@@ -1,3 +1,4 @@
+- bigmatrixmultiplication.py
 This prog is derived from exampleMatmulSingle.py
  dimension of the matrix: N = 100000 
  number of splits along one dimension d = 100 
@@ -15,4 +16,47 @@ Performance:
     Time for completition:
      d=100: 3min 19.717sec
      d=10:  7min 40.646sec
-    
+
+- synchronous sgd
+This code is based on the skeleton of exampleSynchronousUpdate.py and exampleReadCriteoData.py     
+    number of features = 33762578
+    max number of iterations = 20000000
+    eta (learning rate) = 0.01
+    check error every nth iteration = 1000
+
+    We have reduced the error check iteration since each update to the model took approx 7 sec (detailed in report)
+
+    On machine 0 we create a model w initialised as a vector of 1s'    
+    Each machine reads from a total of 5 input files, 2 in the case of machine 5. 
+    The tensors produced by each machine to produce the local gradient are appended to a list and on 
+    machine 0, the tensors are combined
+
+    So the graph looks like 5 tensors - 1 on each machine - all feeding into 1 tensor on machine 0 that
+    computes and reassigns the value of the model w.
+
+    After n updates, machine 0 computes the error on the test file (#22) and logs it as a message in a Print tensor.
+
+    The code is initiated using the session from machine 0, thereby the update to w on 0 waits on outputs from tensors
+    placed on other machines.
+
+- async sgd
+This code is based on the skeleton of exampleAsynchronousUpdate.py and exampleReadCriteoData.py     
+    number of features = 33762578
+    max number of iterations = 20000000
+    eta (learning rate) = 0.01
+    check error every nth iteration = 1000
+
+    We have reduced the error check iteration since each update to the model took approx 3 sec (detailed in report)
+
+    On machine 0 we create a model w initialised as a vector of 1s'
+    Each machine reads from a total of 5 input files, 2 in the case of machine 5 and computes a local gradient for each example.
+
+    We place the update of w operation on machine 0, and execute the computations using the local session on every machine. Therefore
+    evey machine updates a common w(on machine 0) and does it independently of other workers.
+
+    There is a common varaible called count on machine 0 that every worker updates once it has updated the model, this is used as a checkpoint to 
+    check the error of the model.
+
+
+
+

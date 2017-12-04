@@ -1,0 +1,4 @@
+1. Spark abstracts complexities of distributing computations
+2. Spark automatically recovers from failures
+3. Spark records all the computation state in master whereas TF records state in parameter servers
+Thus, TF provides more flexibility
