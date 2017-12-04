@@ -1,0 +1,18 @@
+This prog is derived from exampleMatmulSingle.py
+ dimension of the matrix: N = 100000 
+ number of splits along one dimension d = 100 
+
+TRICK: Calculate machine for sub-matrix by ((i+j) % 5)
+Explanation:
+This will place sub-matrtix (i,j) and (j,i) on same host
+This placement strategy will reduce shuffle over network
+intermediate_traces will store trace for all sub-matrices on each machine
+
+Final Step:
+Calculate total trace by summing up all elements from intermediate_traces
+
+Performance:
+    Time for completition:
+     d=100: 3min 19.717sec
+     d=10:  7min 40.646sec
+    
