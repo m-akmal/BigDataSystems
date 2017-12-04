@@ -5,9 +5,9 @@ import tensorflow as tf
 num_features = 33762578
 num_iterations = 20000000
 eta = 0.01
-check_error_iteration = 1
+check_error_iteration = 1000
 
-test_file = '/home/ubuntu/rohit/tf/syncsgd/data/criteo-tfr/tfrecords22'
+
 files = {
     0: ['/home/ubuntu/rohit/tf/syncsgd/data/criteo-tfr/tfrecords00', '/home/ubuntu/rohit/tf/syncsgd/data/criteo-tfr/tfrecords01', '/home/ubuntu/rohit/tf/syncsgd/data/criteo-tfr/tfrecords02', '/home/ubuntu/rohit/tf/syncsgd/data/criteo-tfr/tfrecords03', '/home/ubuntu/rohit/tf/syncsgd/data/criteo-tfr/tfrecords04'],
     1: ['/home/ubuntu/rohit/tf/syncsgd/data/criteo-tfr/tfrecords05', '/home/ubuntu/rohit/tf/syncsgd/data/criteo-tfr/tfrecords06', '/home/ubuntu/rohit/tf/syncsgd/data/criteo-tfr/tfrecords07', '/home/ubuntu/rohit/tf/syncsgd/data/criteo-tfr/tfrecords08', '/home/ubuntu/rohit/tf/syncsgd/data/criteo-tfr/tfrecords09'],
@@ -16,44 +16,40 @@ files = {
     4: ['/home/ubuntu/rohit/tf/syncsgd/data/criteo-tfr/tfrecords20', '/home/ubuntu/rohit/tf/syncsgd/data/criteo-tfr/tfrecords21']
 }
 
-def sign(dot):
-    if dot<=0:
-        return -1
-    else:
-        return 1
+test_file = ['/home/ubuntu/rohit/tf/syncsgd/data/criteo-tfr/tfrecords22']
 
-def calculate_avg_error(i):
-    print("calculating error for %d" % i)
-    error_count = 0
-    total_count = 0
-    record_iterator = tf.python_io.tf_record_iterator(path=test_file)
-    for string_record in record_iterator:
-        total_count = total_count+1
-        features = tf.parse_single_example(string_record,
-                                            features={
-                                                'label': tf.FixedLenFeature([1], dtype=tf.int64),
-                                                'index' : tf.VarLenFeature(dtype=tf.int64),
-                                                'value' : tf.VarLenFeature(dtype=tf.float32),
-                                            }
-                                            )
+def calculate_error():
+    with tf.device("/job:worker/task:0"):
+        test_filename_queue = tf.train.string_input_producer(test_file, num_epochs=None)
+        test_reader = tf.TFRecordReader()
 
-        label = features['label']
+        _, serialized_example = test_reader.read(test_filename_queue)
+
+        test_features = tf.parse_single_example(serialized_example,
+                                        features={
+                                            'label': tf.FixedLenFeature([1], dtype=tf.int64),
+                                            'index' : tf.VarLenFeature(dtype=tf.int64),
+                                            'value' : tf.VarLenFeature(dtype=tf.float32),
+                                        }
+                                        )
+
+        test_label = test_features['label']
         # casting so we can multiply with dot product
-        label = tf.cast(label, tf.float32)
-        index = features['index']
-        value = features['value']
+        test_label = tf.cast(test_label, tf.float32)
+        test_index = test_features['index']
+        test_value = test_features['value']
 
-        dense_feature = tf.sparse_to_dense(tf.sparse_tensor_to_dense(index),
+        test_feature = tf.sparse_to_dense(tf.sparse_tensor_to_dense(test_index),
                                             [num_features,],
-                                            tf.sparse_tensor_to_dense(value))
+                                            tf.sparse_tensor_to_dense(test_value))
 
-        # -- SGD error computation
-        dot = tf.reduce_sum(tf.mul(w, tf.transpose(dense_feature)))
-        error = 1 if (label != sign(dot.eval())) else 0
-        if error == 1:
-            error_count=error_count+1
-    error_count = tf.Print(error_count, [error_count], "error count out of %d for iteration %d = "%(total_count,i))
-    error_count.eval()        
+        test_dot = tf.reduce_sum(tf.mul(w, tf.transpose(test_feature)))
+        # error = tf.Variable(0," error")
+        return tf.equal(test_label, tf.sign(test_dot))
+        # error = 0 if (tf.equal(label,tf.sign(test_dot))) else 1
+        # error = tf.Print(error, [error], "error value")
+        # return error
+
 
 def local_computation(file_list):
     filename_queue = tf.train.string_input_producer(file_list, num_epochs=None)
@@ -84,12 +80,12 @@ def local_computation(file_list):
     local_gradient = label * (tf.sigmoid(label * dot) - 1) * dense_feature
     gradients.append(local_gradient)
     # !-- SGD error computation
-     
 
 g = tf.Graph()
 
 with g.as_default():
 
+    error_count = 0
     # creating a model variable on task 0. This is a process running on node vm-48-1
     with tf.device("/job:worker/task:0"):
         w = tf.Variable(tf.ones([num_features,]), name="model")
@@ -106,18 +102,27 @@ with g.as_default():
     with tf.device("/job:worker/task:0"):
         aggregator = tf.add_n(gradients)
         assign_op = w.assign_sub(aggregator * eta)
-	assign_op = tf.Print(assign_op,[assign_op], "assign op")
+        assign_op = tf.Print(assign_op, [assign_op], "new value of w")
+        error_op = calculate_error()
+	# assign_op = tf.Print(assign_op,[assign_op], "assign op")
         # assign_op = w.assign_add(aggregator)
 
     with tf.Session("grpc://vm-23-1:2222") as sess:
-	print("starting queue runners")
+	print "starting queue runners"
         tf.train.start_queue_runners(sess=sess)
         sess.run(tf.initialize_all_variables())
         for i in range(1, num_iterations+1):
             sess.run(assign_op)
-            print(w.eval()) 				
+            # print w.eval() 				
             if i % check_error_iteration == 0:
-                calculate_avg_error(i)
+                for err in range(0, 10):
+	            # sess.run(avg_error_op)
+                    error_count = error_count+ (0 if error_op.eval() == True else 1)
+                print "total error count at %d (out of 10) = %d " % (i, error_count)
+                msg = tf.Print(error_count, [error_count], "error count from tensor at iter %d" % i)
+                msg.eval()
+                error_count = 0
+                
         sess.close()
 
 
