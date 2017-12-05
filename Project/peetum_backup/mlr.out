@@ -1,0 +1,112 @@
+Warning: Permanently added '10.10.1.4' (RSA) to the list of known hosts.
+I1204 18:00:14.329973  7034 mlr_engine.cpp:82] Reading train file: /proj/cs744-PG0/dm1/mnist8m.3
+tcmalloc: large alloc 2013274112 bytes == 0x7b680000 @  0x7f6861ad1197 0x4940d4 0x48ff54 0x490de5 0x491130 0x41deb9 0x40d87e 0x7f68607cb830
+tcmalloc: large alloc 4026540032 bytes == 0xf3682000 @  0x7f6861ad1197 0x4940d4 0x48ff54 0x490de5 0x491130 0x41deb9 0x40d87e 0x7f68607cb830
+tcmalloc: large alloc 8053071872 bytes == 0x1e3e8c000 @  0x7f6861ad1197 0x4940d4 0x48ff54 0x490de5 0x491130 0x41deb9 0x40d87e 0x7f68607cb830
+tcmalloc: large alloc 16106135552 bytes == 0x3c468e000 @  0x7f6861ad1197 0x4940d4 0x48ff54 0x490de5 0x491130 0x41deb9 0x40d87e 0x7f68607cb830
+tcmalloc: large alloc 11895119872 bytes == 0x784e90000 @  0x7f6861ad1197 0x490e03 0x491130 0x41deb9 0x40d87e 0x7f68607cb830
+I1204 18:01:15.797773  6844 data_loading.cpp:195] Read 810000 instances from /proj/cs744-PG0/dm1/mnist8m.2 in 61.5097 seconds.
+I1204 18:01:15.851511  6844 mlr_engine.cpp:96] Reading test file: /proj/cs744-PG0/dm1/mnist8m_test
+tcmalloc: large alloc 2013274112 bytes == 0xd04a6000 @  0x7f9f13f83197 0x4940d4 0x48ff54 0x490de5 0x491130 0x41df48 0x40d87e 0x7f9f12c7d830
+tcmalloc: large alloc 4026540032 bytes == 0x1e479e000 @  0x7f9f13f83197 0x4940d4 0x48ff54 0x490de5 0x491130 0x41df48 0x40d87e 0x7f9f12c7d830
+tcmalloc: large alloc 8053071872 bytes == 0x7857a2000 @  0x7f9f13f83197 0x4940d4 0x48ff54 0x490de5 0x491130 0x41df48 0x40d87e 0x7f9f12c7d830
+tcmalloc: large alloc 16106135552 bytes == 0x3c4fa0000 @  0x7f9f13f83197 0x4940d4 0x48ff54 0x490de5 0x491130 0x41df48 0x40d87e 0x7f9f12c7d830
+tcmalloc: large alloc 11895119872 bytes == 0x7857a2000 @  0x7f9f13f83197 0x490e03 0x491130 0x41df48 0x40d87e 0x7f9f12c7d830
+I1204 18:02:16.946012  6844 data_loading.cpp:195] Read 810000 instances from /proj/cs744-PG0/dm1/mnist8m_test in 61.0945 seconds.
+I1204 18:02:17.014111  6844 mlr_main.cpp:138] Starting MLR with 4 threads on client 2
+I1204 18:22:24.643764  7034 mlr_main.cpp:150] MLR finished and shut down!
+ngine.cpp:210] Batch size: 20250
+I1204 18:03:21.876199 22034 mlr_engine.cpp:266] 1 10 train-0-1: 0.729125 train-entropy: 25.1806 num-train-used: 160000 test-0-1: 0.762500 num-test-used: 320 time: 35.8851
+I1204 18:03:51.135924 22034 mlr_engine.cpp:266] 2 20 train-0-1: 0.58385 train-entropy: 20.164 num-train-used: 160000 test-0-1: 0.609375 num-test-used: 320 time: 64.8396
+I1204 18:04:20.599556 22034 mlr_engine.cpp:266] 3 30 train-0-1: 0.396475 train-entropy: 13.6936 num-train-used: 160000 test-0-1: 0.418750 num-test-used: 320 time: 94.099
+I1204 18:04:50.970341 22034 mlr_engine.cpp:266] 4 40 train-0-1: 0.450275 train-entropy: 15.5515 num-train-used: 160000 test-0-1: 0.481250 num-test-used: 320 time: 123.563
+I1204 18:05:20.672418 22034 mlr_engine.cpp:266] 5 50 train-0-1: 0.292725 train-entropy: 10.1104 num-train-used: 160000 test-0-1: 0.328125 num-test-used: 320 time: 153.933
+I1204 18:05:50.390966 22034 mlr_engine.cpp:266] 6 60 train-0-1: 0.2324 train-entropy: 8.02687 num-train-used: 160000 test-0-1: 0.250000 num-test-used: 320 time: 183.636
+I1204 18:06:20.083290 22034 mlr_engine.cpp:266] 7 70 train-0-1: 0.317075 train-entropy: 10.9515 num-train-used: 160000 test-0-1: 0.353125 num-test-used: 320 time: 213.354
+I1204 18:06:49.744906 22034 mlr_engine.cpp:266] 8 80 train-0-1: 0.327775 train-entropy: 11.321 num-train-used: 160000 test-0-1: 0.356250 num-test-used: 320 time: 243.047
+I1204 18:07:19.398587 22034 mlr_engine.cpp:266] 9 90 train-0-1: 0.321625 train-entropy: 11.1086 num-train-used: 160000 test-0-1: 0.365625 num-test-used: 320 time: 272.708
+I1204 18:07:48.887820 22034 mlr_engine.cpp:266] 10 100 train-0-1: 0.541825 train-entropy: 18.7129 num-train-used: 160000 test-0-1: 0.537500 num-test-used: 320 time: 302.362
+I1204 18:08:18.598692 22034 mlr_engine.cpp:266] 11 110 train-0-1: 0.344375 train-entropy: 11.8944 num-train-used: 160000 test-0-1: 0.384375 num-test-used: 320 time: 331.851
+I1204 18:08:48.372023 22034 mlr_engine.cpp:266] 12 120 train-0-1: 0.302175 train-entropy: 10.4368 num-train-used: 160000 test-0-1: 0.306250 num-test-used: 320 time: 361.562
+I1204 18:09:18.573979 22034 mlr_engine.cpp:266] 13 130 train-0-1: 0.181725 train-entropy: 6.27661 num-train-used: 160000 test-0-1: 0.215625 num-test-used: 320 time: 391.335
+I1204 18:09:48.493327 22034 mlr_engine.cpp:266] 14 140 train-0-1: 0.17345 train-entropy: 5.9908 num-train-used: 160000 test-0-1: 0.187500 num-test-used: 320 time: 421.537
+I1204 18:10:18.239580 22034 mlr_engine.cpp:266] 15 150 train-0-1: 0.275725 train-entropy: 9.52328 num-train-used: 160000 test-0-1: 0.278125 num-test-used: 320 time: 451.457
+I1204 18:10:47.921419 22034 mlr_engine.cpp:266] 16 160 train-0-1: 0.31105 train-entropy: 10.7434 num-train-used: 160000 test-0-1: 0.340625 num-test-used: 320 time: 481.203
+I1204 18:11:17.721280 22034 mlr_engine.cpp:266] 17 170 train-0-1: 0.2613 train-entropy: 9.02505 num-train-used: 160000 test-0-1: 0.300000 num-test-used: 320 time: 510.885
+I1204 18:11:47.518296 22034 mlr_engine.cpp:266] 18 180 train-0-1: 0.266225 train-entropy: 9.19516 num-train-used: 160000 test-0-1: 0.303125 num-test-used: 320 time: 540.685
+I1204 18:12:17.369249 22034 mlr_engine.cpp:266] 19 190 train-0-1: 0.226725 train-entropy: 7.83087 num-train-used: 160000 test-0-1: 0.256250 num-test-used: 320 time: 570.482
+I1204 18:12:17.369268 22034 mlr_engine.cpp:269] SaveLoss now...
+I1204 18:12:17.369506 22034 mlr_engine.cpp:427] Loss up to 18 (exclusive) is saved to /users/group23/petuum_test/bosen/app/mlr/out.loss in 0.000216662
+I1204 18:12:17.375953 22034 mlr_sgd_solver.cpp:160] Saved weight to /users/group23/petuum_test/bosen/app/mlr/out.weight
+I1204 18:12:17.375998 22034 mlr_engine.cpp:273] Checkpointing finished in 0.00672959
+I1204 18:12:47.116809 22034 mlr_engine.cpp:266] 20 200 train-0-1: 0.391125 train-entropy: 13.5089 num-train-used: 160000 test-0-1: 0.387500 num-test-used: 320 time: 600.333
+I1204 18:13:16.893097 22034 mlr_engine.cpp:266] 21 210 train-0-1: 0.2501 train-entropy: 8.63822 num-train-used: 160000 test-0-1: 0.296875 num-test-used: 320 time: 630.08
+I1204 18:13:46.702744 22034 mlr_engine.cpp:266] 22 220 train-0-1: 0.242475 train-entropy: 8.37486 num-train-used: 160000 test-0-1: 0.287500 num-test-used: 320 time: 659.857
+I1204 18:14:16.390424 22034 mlr_engine.cpp:266] 23 230 train-0-1: 0.331875 train-entropy: 11.4626 num-train-used: 160000 test-0-1: 0.353125 num-test-used: 320 time: 689.666
+I1204 18:14:46.211946 22034 mlr_engine.cpp:266] 24 240 train-0-1: 0.282875 train-entropy: 9.77023 num-train-used: 160000 test-0-1: 0.334375 num-test-used: 320 time: 719.354
+I1204 18:15:16.130326 22034 mlr_engine.cpp:266] 25 250 train-0-1: 0.21735 train-entropy: 7.50706 num-train-used: 160000 test-0-1: 0.250000 num-test-used: 320 time: 749.175
+I1204 18:15:45.894178 22034 mlr_engine.cpp:266] 26 260 train-0-1: 0.247975 train-entropy: 8.56482 num-train-used: 160000 test-0-1: 0.271875 num-test-used: 320 time: 779.094
+I1204 18:16:15.726147 22034 mlr_engine.cpp:266] 27 270 train-0-1: 0.327375 train-entropy: 11.3072 num-train-used: 160000 test-0-1: 0.359375 num-test-used: 320 time: 808.857
+I1204 18:16:45.639549 22034 mlr_engine.cpp:266] 28 280 train-0-1: 0.1827 train-entropy: 6.31028 num-train-used: 160000 test-0-1: 0.231250 num-test-used: 320 time: 838.689
+I1204 18:17:15.435606 22034 mlr_engine.cpp:266] 29 290 train-0-1: 0.242075 train-entropy: 8.36104 num-train-used: 160000 test-0-1: 0.256250 num-test-used: 320 time: 868.603
+I1204 18:17:45.224898 22034 mlr_engine.cpp:266] 30 300 train-0-1: 0.360525 train-entropy: 12.4522 num-train-used: 160000 test-0-1: 0.346875 num-test-used: 320 time: 898.399
+I1204 18:18:15.613514 22034 mlr_engine.cpp:266] 31 310 train-0-1: 0.24395 train-entropy: 8.4258 num-train-used: 160000 test-0-1: 0.281250 num-test-used: 320 time: 928.188
+I1204 18:18:45.485587 22034 mlr_engine.cpp:266] 32 320 train-0-1: 0.177975 train-entropy: 6.14709 num-train-used: 160000 test-0-1: 0.215625 num-test-used: 320 time: 958.577
+I1204 18:19:15.281493 22034 mlr_engine.cpp:266] 33 330 train-0-1: 0.2402 train-entropy: 8.29628 num-train-used: 160000 test-0-1: 0.262500 num-test-used: 320 time: 988.449
+I1204 18:19:45.025498 22034 mlr_engine.cpp:266] 34 340 train-0-1: 0.3625 train-entropy: 12.5204 num-train-used: 160000 test-0-1: 0.328125 num-test-used: 320 time: 1018.24
+I1204 18:20:20.271682 22034 mlr_engine.cpp:266] 35 350 train-0-1: 0.183275 train-entropy: 6.33014 num-train-used: 160000 test-0-1: 0.228125 num-test-used: 320 time: 1047.99
+I1204 18:20:50.304147 22034 mlr_engine.cpp:266] 36 360 train-0-1: 0.161125 train-entropy: 5.5651 num-train-used: 160000 test-0-1: 0.181250 num-test-used: 320 time: 1083.23
+I1204 18:21:20.236237 22034 mlr_engine.cpp:266] 37 370 train-0-1: 0.162125 train-entropy: 5.59964 num-train-used: 160000 test-0-1: 0.181250 num-test-used: 320 time: 1113.27
+I1204 18:21:49.954274 22034 mlr_engine.cpp:266] 38 380 train-0-1: 0.36265 train-entropy: 12.5256 num-train-used: 160000 test-0-1: 0.378125 num-test-used: 320 time: 1143.2
+I1204 18:22:19.752394 22034 mlr_engine.cpp:266] 39 390 train-0-1: 0.292125 train-entropy: 10.0897 num-train-used: 160000 test-0-1: 0.340625 num-test-used: 320 time: 1172.92
+I1204 18:22:19.752414 22034 mlr_engine.cpp:269] SaveLoss now...
+I1204 18:22:19.752758 22034 mlr_engine.cpp:427] Loss up to 38 (exclusive) is saved to /users/group23/petuum_test/bosen/app/mlr/out.loss in 0.000338994
+I1204 18:22:19.759490 22034 mlr_sgd_solver.cpp:160] Saved weight to /users/group23/petuum_test/bosen/app/mlr/out.weight
+I1204 18:22:19.759536 22034 mlr_engine.cpp:273] Checkpointing finished in 0.00712227
+I1204 18:22:24.627125 22034 mlr_engine.cpp:299] 
+Epoch Batch Train-0-1 Train-Entropy Num-Train-Used Test-0-1 Num-Test-Used Time
+1 10 0.729125 25.1806 160000 0.762500 320 35.8851
+2 20 0.58385 20.164 160000 0.609375 320 64.8396
+3 30 0.396475 13.6936 160000 0.418750 320 94.099
+4 40 0.450275 15.5515 160000 0.481250 320 123.563
+5 50 0.292725 10.1104 160000 0.328125 320 153.933
+6 60 0.2324 8.02687 160000 0.250000 320 183.636
+7 70 0.317075 10.9515 160000 0.353125 320 213.354
+8 80 0.327775 11.321 160000 0.356250 320 243.047
+9 90 0.321625 11.1086 160000 0.365625 320 272.708
+10 100 0.541825 18.7129 160000 0.537500 320 302.362
+11 110 0.344375 11.8944 160000 0.384375 320 331.851
+12 120 0.302175 10.4368 160000 0.306250 320 361.562
+13 130 0.181725 6.27661 160000 0.215625 320 391.335
+14 140 0.17345 5.9908 160000 0.187500 320 421.537
+15 150 0.275725 9.52328 160000 0.278125 320 451.457
+16 160 0.31105 10.7434 160000 0.340625 320 481.203
+17 170 0.2613 9.02505 160000 0.300000 320 510.885
+18 180 0.266225 9.19516 160000 0.303125 320 540.685
+19 190 0.226725 7.83087 160000 0.256250 320 570.482
+20 200 0.391125 13.5089 160000 0.387500 320 600.333
+21 210 0.2501 8.63822 160000 0.296875 320 630.08
+22 220 0.242475 8.37486 160000 0.287500 320 659.857
+23 230 0.331875 11.4626 160000 0.353125 320 689.666
+24 240 0.282875 9.77023 160000 0.334375 320 719.354
+25 250 0.21735 7.50706 160000 0.250000 320 749.175
+26 260 0.247975 8.56482 160000 0.271875 320 779.094
+27 270 0.327375 11.3072 160000 0.359375 320 808.857
+28 280 0.1827 6.31028 160000 0.231250 320 838.689
+29 290 0.242075 8.36104 160000 0.256250 320 868.603
+30 300 0.360525 12.4522 160000 0.346875 320 898.399
+31 310 0.24395 8.4258 160000 0.281250 320 928.188
+32 320 0.177975 6.14709 160000 0.215625 320 958.577
+33 330 0.2402 8.29628 160000 0.262500 320 988.449
+34 340 0.3625 12.5204 160000 0.328125 320 1018.24
+35 350 0.183275 6.33014 160000 0.228125 320 1047.99
+36 360 0.161125 5.5651 160000 0.181250 320 1083.23
+37 370 0.162125 5.59964 160000 0.181250 320 1113.27
+38 380 0.36265 12.5256 160000 0.378125 320 1143.2
+39 390 0.292125 10.0897 160000 0.340625 320 1172.92
+40 400 0.196775 6.79642 160000 0.221875 320 1202.72
+40 400 0.202714 7.00079 3.24e+06 0.202714 810000 1207.02
+I1204 18:22:24.627179 22034 mlr_engine.cpp:300] Final eval: 40 400 train-0-1: 0.202714 train-entropy: 7.00079 num-train-used: 3.24e+06 test-0-1: 0.202714 num-test-used: 810000 time: 1207.02
+I1204 18:22:24.627923 22034 mlr_engine.cpp:427] Loss up to 40 (exclusive) is saved to /users/group23/petuum_test/bosen/app/mlr/out.loss in 0.000731329
+I1204 18:22:24.640604 22034 mlr_sgd_solver.cpp:160] Saved weight to /users/group23/petuum_test/bosen/app/mlr/out.weight
+I1204 18:22:24.642410 21982 mlr_main.cpp:150] MLR finished and shut down!
