@@ -1,4 +1,25 @@
+How ML on Spark differs from Tenorflow:
+
 1. Spark abstracts complexities of distributing computations
+Spark provides high level abstractions in multiple languages (Java, Scala, Python) that hide the underlying work distribution operations.
+TF does not abstract work distribution like spark does and allows the user to specify where pieces of the graph are to be placed.
+This can be seen as a Pro or Con for either system depending on how much control we want on our system.
+
 2. Spark automatically recovers from failures
+Spark can recover from node failures automatically. 
+From the TF whitepaper: "When a failure is detected, the entire graph execution is aborted and restarted from scratch.". TF supports 
+checkpointing and unlike Spark, the recovery is only at the checkpoint rather than on an individual worker node failing.
+This is a Pro for Spark and a Con for TF.
+
 3. Spark records all the computation state in master whereas TF records state in parameter servers
-Thus, TF provides more flexibility
+Thus, TF provides more flexibility.
+
+4. TensorFlow has the ability to perform partial subgraph computation. This allows partitioning of a model so that distributed training may be done.
+This allows TF to support Model Parallelism.
+This is a Pro for TF.
+
+Graph of test errors
+
+
+Bottlenecks
+
